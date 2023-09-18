@@ -75,8 +75,11 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
+        #for local tracking
+        
         #predictions = lr.predict(train_x)
         #signature = infer_signature(train_x, predictions)
+        #tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
         ## For Remote server only(DAGShub)
 
@@ -93,6 +96,7 @@ if __name__ == "__main__":
             # https://mlflow.org/docs/latest/model-registry.html#api-workflow
             mlflow.sklearn.log_model(
                 lr, "model", registered_model_name="ElasticnetWineModel"
+                #just add signature=signature in above line and last line for local tracking
             )
         else:
             mlflow.sklearn.log_model(lr, "model")
